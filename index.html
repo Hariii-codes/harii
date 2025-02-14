@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine, Shakes? 💖</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Great+Vibes&family=Cinzel+Decorative&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #4a4a4a;
+      line-height: 1.6;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Envelope Styles */
+    .envelope-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background: #d9534f;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .envelope .flap {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-bottom: 50px solid #d9534f;
+      transform-origin: top;
+      transition: transform 0.5s ease;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope .hearts {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .envelope .heart {
+      font-size: 2rem;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    .envelope-text {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      color: white;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    /* Flower Bouquet Animation */
+    .flower-bouquet {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      font-size: 4rem;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    /* Proposal Section */
+    .proposal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 500px;
+      position: relative;
+    }
+
+    .question {
+      font-size: 2rem;
+      color: #d63384;
+      margin-bottom: 1.5rem;
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background: #ff4081;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255,64,129,0.4);
+    }
+
+    .no {
+      background: #ff1744;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255,23,68,0.4);
+      position: static;
+    }
+
+    .dark-romance {
+      font-size: 1.1rem;
+      color: #880e4f;
+      text-align: center;
+      margin-top: 1rem;
+      min-height: 60px;
+      font-family: 'Cinzel Decorative', cursive; /* Vintage font for reasons */
+    }
+
+    /* Vintage Letter */
+    .vintage-letter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f9f3e9;
+      padding: 2rem;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+      font-family: 'Dancing Script', cursive;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .vintage-letter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #d4af37;
+    }
+
+    .letter-text {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: #4a4a4a;
+    }
+
+    .rose {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Music -->
+  <audio id="romanticSong" loop>
+   type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Envelope -->
+  <div class="envelope-container">
+    <div class="envelope" onclick="openEnvelope()">
+      <div class="flap"></div>
+      <div class="hearts">
+        <div class="heart">💖</div>
+        <div class="heart">💖</div>
+        <div class="heart">💖</div>
+      </div>
+      <p class="envelope-text">Tap to Open</p>
+    </div>
+  </div>
+
+  <!-- Flower Bouquet -->
+  <div class="flower-bouquet">💐</div>
+
+  <!-- Proposal Section -->
+  <div class="proposal">
+    <div class="container">
+      <h1 class="question">Will You Be My Valentine, Shakes? 💖</h1>
+      <div class="buttons">
+        <button class="btn yes" onclick="showLove()">Yes</button>
+        <button class="btn no" id="noBtn" onmouseover="moveNo()">No</button>
+      </div>
+      <p class="dark-romance" id="darkMessage"></p>
+    </div>
+  </div>
+
+  <!-- Vintage Letter -->
+  <div class="vintage-letter">
+    <button class="close-btn" onclick="closeLetter()">×</button>
+    <div class="letter-content">
+      <p class="letter-text">My Dearest Shakes,</p>
+      <p class="letter-text">As I sit down to write this letter, my heart is overflowing with emotions that words can hardly capture. Yet, I’ll try my best to pour my feelings onto this page, hoping that every word conveys just how much you mean to me....</p>
+      <p class="letter-text">YFrom the moment you came into my life, everything changed. You brought with you a light that I didn’t even know I was missing. Your smile, your laughter, your kindness—they’ve become the most beautiful parts of my world. You have this incredible way of making even the simplest moments feel magical, and I can’t help but fall for you more and more every single day..</p>
+      <p class="letter-text">Shakes, you are the most amazing person I’ve ever known. Your strength inspires me, your warmth comforts me, and your love completes me. You’ve shown me what it means to truly care for someone, to be selfless, and to love unconditionally. With you, I feel like I’ve found my home—a place where I belong, where I’m understood, and where I’m loved for exactly who I am.</p>
+      <p class="letter-text">You’ve taught me so much about love, Shakes. Love isn’t just about grand gestures or perfect moments; it’s about the little things—the quiet mornings, the shared smiles, the way you hold my hand when we walk together. It’s about being there for each other, through the highs and the lows, and knowing that no matter what, we’ll always have each other’s backs.</p>
+ <p class="letter-text">On this Valentine’s Day, I want to ask you something that I’ve been dreaming about for so long. Will you be my Valentine, not just today, but every day? Will you let me love you, support you, and stand by your side through all of life’s adventures? Because there’s no one else I’d rather share this journey with than you.
+
+Thank you for being you, Shakes. Thank you for loving me, for believing in me, and for making my life so much brighter. You are my greatest blessing, and I’ll spend the rest of my life trying to make you as happy as you’ve made me.</p>
+      <p class="letter-text">With all my love, now and forever,.</p>
+
+      <p class="letter-text">Yours Hariii</p>
+      <div class="rose">🌹</div>
+    </div>
+  </div>
+
+  <script>
+    // Romantic Reasons with Dark Romance Twist
+    const reasons = [
+      "Without you, ice cream would never taste as sweet. 🍦💔",
+      "I’d bring you a thousand Corner House DBC treats to see you smile. 🍫💕",
+      "Without you, ice cream would never taste as sweet. 🍦💔",
+
+  "You love Corner House DBC, and I’d bring you a thousand just to see you smile. 🍫💕",
+
+  "Movie nights on Discord wouldn’t be the same without your laughter. 🎬💖",
+
+  "Every second with you is my favorite memory—don’t take that away. ⏳❤️",
+
+  "Your eyes hold the stars, and I’m lost in their beauty. ✨😍",
+
+  "You’re too pretty to break my heart like this. 💔😢",
+
+  "Your skin is white as milk, but my love for you is deeper than the darkest night. 🌙💘",
+
+  "Say 'No' again, and I’ll haunt your dreams with love. 👻💓",
+
+  "I’d rather walk through fire than live without you. 🔥💖",
+
+  "If you say 'No,' I’ll rewrite the universe until you say 'Yes.' 🌌💞",
+
+  "Every heartbeat of mine whispers your name—don’t ignore it. 💓🔊",
+
+  "Your 'No' is a dagger through my soul. 🗡️💔",
+
+  "Do you really want to see a grown-up cry? 😭💘",
+
+  "Love without you is like a melody with no tune. 🎶💔",
+
+  "I’d steal the moon if it meant you’d say 'Yes.' 🌙💖",
+
+  "Your love is my only addiction—don’t make me go into withdrawal. 💉💞",
+
+  "Our love story is fate, don’t fight destiny. 🏹💘",
+
+  "The moment you say 'Yes,' the world will shine brighter. 🌎✨",
+
+  "I dream of you every night, don’t turn my dreams into nightmares. 😴💔",
+
+  "Even the stars would weep if you say 'No.' 🌟😭",
+
+  "Love like ours happens once in a lifetime—don’t let it slip away. ⏳❤️",
+
+  "You are the only missing piece in my perfect puzzle. 🧩💘",
+
+  "If you leave, my heart will be an abandoned castle. 🏰💔",
+
+  "You have bewitched me, body and soul—don’t break the spell. 🪄💞",
+
+  "I’d cross every ocean just to be with you. 🌊💖",
+
+  "Every 'No' from you shatters a little piece of my heart. 💔💔",
+
+  "If loving you is madness, I never want to be sane. 🖤💘",
+
+  "Don’t turn our fairytale into a tragedy. 📖💔",
+
+  "I’ll keep asking until the universe bends to my love. 🔄💘",
+
+  "The wind whispers your name, asking you to say 'Yes.' 🍃💖",
+
+  "If love is a game, you’ve already won my heart. 🃏❤️",
+
+  "Even gravity can’t pull me down like your 'No' does. 🌍💔",
+
+  "My world is painted in your colors—don’t drain it of love. 🎨💘",
+
+  "You are the sun in my sky; without you, it’s eternal night. ☀️🌙",
+
+  "Your smile is my favorite melody—don’t silence it. 🎶💖",
+
+  "I’d trade all the stars in the sky just to hear you say 'Yes.' 🌌💘",
+
+  "Your love is the only treasure I seek—don’t hide it away. 💎💖",
+
+  "Without you, my heart is a ship lost at sea. 🚢💔",
+
+  "Your laughter is my favorite song—don’t stop singing it. 🎤💕",
+
+  "I’d climb every mountain just to be by your side. ⛰️💖",
+
+  "Your 'No' is a storm, but my love is the calm after. 🌧️💘",
+
+  "If you leave, my heart will be a garden without flowers. 🌸💔",
+
+  "Your love is the only light in my darkness—don’t turn it off. 💡💖",
+
+  "I’d wait a thousand lifetimes just to hear you say 'Yes.' ⏳💘",
+
+  "Your 'No' is a thunderclap, but my love is the rainbow after. 🌈💖",
+
+  "Without you, my heart is a book with no words. 📖💔",
+
+  "Your love is the only fire that keeps me warm—don’t extinguish it. 🔥💘",
+
+  "I’d sail every ocean just to find my way back to you. 🌊💖",
+
+  "Your 'No' is a winter storm, but my love is the spring that follows. 🌷💘",
+    ];
+
+    let currentReason = 0;
+    let isFirstMove = true;
+
+    // Shuffle reasons array
+    reasons.sort(() => Math.random() - 0.5);
+
+    // Play romantic song
+    const romanticSong = document.getElementById('romanticSong');
+    romanticSong.play();
+
+    function openEnvelope() {
+      document.querySelector('.envelope').classList.add('open');
+      setTimeout(() => {
+        document.querySelector('.envelope-container').style.display = 'none';
+        document.querySelector('.flower-bouquet').style.display = 'block';
+        setTimeout(() => {
+          document.querySelector('.flower-bouquet').style.display = 'none';
+          document.querySelector('.proposal').style.display = 'flex';
+        }, 2000); // Show bouquet for 2 seconds
+      }, 500);
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById('noBtn');
+      const container = document.querySelector('.container');
+      const darkMessage = document.getElementById('darkMessage');
+
+      if (isFirstMove) {
+        noBtn.style.position = 'absolute';
+        isFirstMove = false;
+      }
+
+      const maxX = container.offsetWidth - noBtn.offsetWidth - 20;
+      const maxY = container.offsetHeight - noBtn.offsetHeight - 20;
+      
+      noBtn.style.left = `${Math.random() * maxX}px`;
+      noBtn.style.top = `${Math.random() * maxY}px`;
+      
+      darkMessage.textContent = reasons[currentReason];
+      currentReason = (currentReason + 1) % reasons.length;
+    }
+
+    function showLove() {
+      document.querySelector('.proposal').style.display = 'none';
+      document.querySelector('.vintage-letter').style.display = 'block';
+    }
+
+    function closeLetter() {
+      document.querySelector('.vintage-letter').style.display = 'none';
+      document.querySelector('.proposal').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
