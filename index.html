@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine, Shakes? 💖</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Envelope -->
+  <div class="envelope-container">
+    <div class="envelope" onclick="openEnvelope()">
+      <div class="flap"></div>
+      <div class="body"></div>
+      <div class="hearts">
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+      </div>
+      <p class="envelope-text">Click to Open</p>
+    </div>
+  </div>
+
+  <!-- Valentine's Proposal -->
+  <div class="section proposal hidden">
+    <div class="container">
+      <h1 class="question">Will You Be My Valentine, Mrs.Shakes? 💖</h1>
+      <div class="buttons">
+        <button class="btn yes" onclick="showLove()">Yes 💕</button>
+        <button class="btn no" id="noBtn" onclick="moveNo()">No 💔</button>
+      </div>
+      <p class="hidden-message" id="hiddenMessage">Yay! You made my heart smile! ❤️😊</p>
+      <p class="dark-romance" id="darkMessage"></p>
+    </div>
+  </div>
+
+  <!-- Vintage Letter (Shown on Yes) -->
+  <div class="vintage-letter hidden">
+    <div class="letter-paper">
+      <p class="letter-text">My Dearest Shakes,</p>
+      <p class="letter-text">
+        From the moment I met you, my heart knew it had found its home. Your smile lights up my world, and your laughter is my favorite melody. Every moment with you feels like a dream, and I can't imagine my life without you.
+      </p>
+      <p class="letter-text">
+        You are my everything—my best friend, my soulmate, and the love of my life. I cherish every memory we've made together, from our ice cream dates at Polar Bear to our long walks under the stars in Mumbai.
+      </p>
+      <p class="letter-text">
+        Will you make me the happiest person in the world and be my Valentine forever?
+      </p>
+      <p class="letter-text">With all my love,</p>
+      <p class="letter-text">Your Hariii
+      </p>
+      <div class="rose">🌹</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
